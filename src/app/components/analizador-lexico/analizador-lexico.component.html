@@ -1,0 +1,39 @@
+<div class="mt-4">
+  <h1>Analizador Lexico</h1>
+
+  <h4>Por favor introduzca las sentencias a analizar</h4>
+  <small class="text-danger">** Este analizador lexico no permite numeros flotantes</small>
+
+  <ngx-codemirror [(ngModel)]="analizadorLexico"
+  [options]="{
+    lineNumbers: true,
+    theme: 'material',
+    mode: 'text/typescript'
+  }"
+></ngx-codemirror>
+  <div>
+    <button type="button" class="btn btn-primary my-4" [disabled]="!analizadorLexico" (click)="analizar()">Analizar</button>
+    <button type="button" class="btn btn-danger float-right my-4" *ngIf="analizadorLexicoData"  (click)="analizadorLexicoData = null">Borar Tabla</button>
+  </div>
+
+  <div class="table-responsive" *ngIf="analizadorLexicoData">
+    <table class="table table-borderless">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Linea</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Posicion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of analizadorLexicoData" [ngClass]="{'table-danger': !data.ok}">
+          <td>{{data.line}}</td>
+          <td>{{data.type}}</td>
+          <td>{{data.value}}</td>
+          <td>{{data.position}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
