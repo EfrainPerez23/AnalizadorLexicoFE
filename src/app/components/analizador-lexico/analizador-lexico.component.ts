@@ -10,16 +10,22 @@ import { AnalizadorLexico } from './model/analizador-lexico';
 export class AnalizadorLexicoComponent implements OnInit {
 
   public analizadorLexico: string;
-  public analizadorLexicoData: AnalizadorLexico[];
+  public analizadorLexicoData: AnalizadorLexico[] = [];
 
   public constructor(private analizador: AnalizadorLexicoService) { }
 
   public ngOnInit(): void  { }
 
   public analizar(): void {
+    this.analizadorLexicoData = [];
+
     this.analizador.analizadorLexico(this.analizadorLexico).subscribe((data: {data: AnalizadorLexico[]}): void => {
       if (data) {
-        this.analizadorLexicoData = data.data;
+        data.data.forEach((lexico: AnalizadorLexico, index: number): void => {
+          setTimeout((): void => {
+            this.analizadorLexicoData.push(lexico);
+          }, 1000 * (index + 1));
+        });
       }
     });
   }

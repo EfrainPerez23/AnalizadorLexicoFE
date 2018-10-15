@@ -13,10 +13,10 @@
 ></ngx-codemirror>
   <div>
     <button type="button" class="btn btn-primary my-4" [disabled]="!analizadorLexico" (click)="analizar()">Analizar</button>
-    <button type="button" class="btn btn-danger float-right my-4" *ngIf="analizadorLexicoData"  (click)="analizadorLexicoData = null">Borar Tabla</button>
+    <button type="button" class="btn btn-danger float-right my-4" *ngIf="analizadorLexicoData && analizadorLexicoData.length > 0"  (click)="analizadorLexicoData = null">Borrar Tabla</button>
   </div>
 
-  <div class="table-responsive" *ngIf="analizadorLexicoData">
+  <div class="table-responsive" *ngIf="analizadorLexicoData && analizadorLexicoData.length > 0">
     <table class="table table-borderless">
       <thead class="thead-light">
         <tr>
